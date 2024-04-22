@@ -20,10 +20,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import tasks
-from tasks.views import index
+
+from project_tracker import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls), # admin/ будет добавлен к базовому пути сайта
     #path('tasks/', tasks.views.index), # path(суфикс url адреса - т.е. часть добавляемая после доменного имени, 
     #ссылка на функцию представления, которая будет автоматически вызыватья при срабатывании url адреса и возвращать ответ на запрос)
