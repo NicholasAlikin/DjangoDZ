@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+    <h1>Детали бага {{ bug.title }}</h1>
+    <p>{{ bug.description }}</p>
+
+    <p><a href="{% url 'quality_control:update_bug' bug.id %}">Изменить отчет об ошибках</a></p>
+
+    <p>
+        <a href="{% url 'quality_control:delete_bug' bug.id %}"
+        onclick="return confirm('Вы уверены, что хотите удалить этот отчет?')">Удалить отчет об ошибках</a>
+    </p>
+
+    <p>Статус - {{ bug.status }}</p>
+    <p>Приоритет - {{ bug.priority }}</p>
+    
+    <p>Связанный проект -
+        <a href="{% url 'tasks:project_detail' bug.project.id %}">{{bug.project.name}}</a>
+    </p>
+    <p>Связанная задача -
+        {% if bug.task %}
+        <a href="{% url 'tasks:task_detail' bug.project.id bug.task.id %}">{{bug.task.name}}</a>
+        {% else %}
+        <a>не задана</a>
+        {% endif %}
+    </p>
+
+    {% endblock %}

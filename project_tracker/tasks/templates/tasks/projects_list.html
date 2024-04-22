@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>Список проектов</h1>
+
+    <!-- Ссылка на создание нового проекта -->
+    <p>
+        <a href="{% url 'tasks:create_project' %}">Создать новый проект</a>
+    </p>
+    
+    <ul>
+        {% for project in project_list %}
+            <li><a href="{% url 'tasks:project_detail' project.id %}">{{ project.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>Список проектов</h1>
+        <ul>
+            {% for project in project_list %}
+                <li><a href="{% url 'tasks:project_detail' project.id %}">{{ project.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html> -->

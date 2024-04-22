@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>{{ project.name }}</h1>
+    <p>{{ project.description }}</p>
+
+    <!-- Ссылка для изменения проекта -->
+    <p>
+        <a href="{% url 'tasks:update_project' project.id %}">Изменить проект</a>
+    </p>
+    
+    <!-- Ссылка для добавления новой задачи -->
+    <p>
+        <a href="{% url 'tasks:add_task_to_project' project.id %}">Добавить новую задачу</a>
+    </p>
+    <!-- Ссылка удаления объекта -->
+    <p>
+        <a href="{% url 'tasks:delete_project' project.id %}"
+        onclick="return confirm('Вы уверены, что хотите удалить этот проект?');">Удалить проект</a>
+    </p>
+
+    <h2>Задачи в проекте</h2>
+    <ul>
+        {% for task in project.task.all %}
+            <li><a href="{% url 'tasks:task_detail' project.id task.id %}">{{ task.name }}</a> - {{ task.status }}</li>
+        {% empty %}
+            <li>В этом проекте пока нет задач.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>{{ project.name }}</h1>
+        <p>{{ project.description }}</p>
+
+        <h2>Задачи в проекте</h2>
+        <ul>
+            {% for task in project.task.all %}
+                <li><a href="{% url 'tasks:task_detail' project.id task.id %}">{{ task.name }}</a> - {{ task.status }}</li>
+            {% empty %}
+                <li>В этом проекте пока нет задач.</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html> -->
